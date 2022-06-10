@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:footer/footer.dart';
-import 'package:footer/footer_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +8,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePagePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     Widget _menu = Drawer(
@@ -50,7 +47,7 @@ class _HomePagePageState extends State<HomePage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.asset(
-                      'assets/images/newyork.jpg',  
+                      'assets/images/newyork.jpg',
                       width: 200,
                       height: 300,
                       fit: BoxFit.fitHeight,
@@ -63,10 +60,9 @@ class _HomePagePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Bài viết '+(i+1).toString(),
+                        Text('Bài viết ' + (i + 1).toString(),
                             style:
-                                TextStyle(fontSize: 18, color: Colors.white)
-                        ),
+                                TextStyle(fontSize: 18, color: Colors.white)),
                       ],
                     )),
                 Positioned(
@@ -153,7 +149,19 @@ class _HomePagePageState extends State<HomePage> {
           ),
         ],
       ),
-      
+      persistentFooterButtons: [
+        
+        Container(
+          width: 900,
+          child: TextButton(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            ),
+            onPressed: (){},
+            child: Text('Thông tin liên lạc', style: TextStyle(color: Colors.blue[900]),),
+          ),
+        )
+      ],
     );
   }
 }
