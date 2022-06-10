@@ -1,4 +1,5 @@
   import 'package:flutter/material.dart';
+import 'package:student_information_management/notification.dart';
 import 'package:student_information_management/post.dart';
 
 class MenuPage extends StatefulWidget {
@@ -25,6 +26,12 @@ class _MenuPagePageState extends State<MenuPage> {
             title: const Text('Danh sách bài viết'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => PostPage()));
+            },
+          ),
+          ListTile(
+            title: const Text('Thông báo'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage()));
             },
           ),
           ListTile(
