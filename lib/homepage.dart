@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_information_management/menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,31 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePagePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Widget _menu = Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text('MENU'),
-          ),
-          ListTile(
-            title: const Text('Khoa'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Phòng'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Cài đặt'),
-            onTap: () {},
-          ),
-        ],
-      ),
-    );
+    Widget _menu = MenuPage();
     Widget _slide = ListView(
         scrollDirection: Axis.horizontal,
         children: List.generate(3, (i) {
@@ -151,16 +128,6 @@ class _HomePagePageState extends State<HomePage> {
       ),
       persistentFooterButtons: [
         
-        Container(
-          width: 900,
-          child: TextButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            ),
-            onPressed: (){},
-            child: Text('Thông tin liên lạc', style: TextStyle(color: Colors.blue[900]),),
-          ),
-        )
       ],
     );
   }
