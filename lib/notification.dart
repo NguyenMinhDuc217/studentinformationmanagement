@@ -22,7 +22,7 @@ class _NotificationPagePageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     Widget _menu = MenuPage();
-    Widget _post = Container(
+    Widget _notification = Container(
       width: 200,
       height: 30,
       decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class _NotificationPagePageState extends State<NotificationPage> {
       child: Text('Thông báo',
           style: TextStyle(fontSize: 20, color: Colors.white)),
     );
-    Widget _listpost = Container(
+    Widget _listnotification = Container(
       margin: EdgeInsets.only(left: 50, right: 50),
       height: 500,
       child: ListView(children: [
@@ -209,8 +209,8 @@ class _NotificationPagePageState extends State<NotificationPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _post,
-            _listpost,
+            _notification,
+            _listnotification,
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_information_management/department.dart';
 import 'package:student_information_management/homepage.dart';
 import 'package:student_information_management/login.dart';
 import 'package:student_information_management/notification.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: NotificationPage(),
+      home: DepartmentPage(),
     );
   }
 }
