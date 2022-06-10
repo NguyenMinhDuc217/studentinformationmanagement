@@ -99,7 +99,6 @@ class _HomePagePageState extends State<HomePage> {
     return Scaffold(
       drawer: _menu,
       appBar: AppBar(
-        centerTitle: true,
         title: Text('LOGO'),
       ),
       body: Column(
@@ -127,7 +126,16 @@ class _HomePagePageState extends State<HomePage> {
         ],
       ),
       persistentFooterButtons: [
-        
+        Container(
+          width: 900,
+          child: TextButton(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            ),
+            onPressed: (){},
+            child: Text('Thông tin liên lạc', style: TextStyle(color: Colors.blue[900]),),
+          ),
+        )
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_information_management/homepage.dart';
 import 'package:student_information_management/login.dart';
+import 'package:student_information_management/post.dart';
 
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: PostPage(),
     );
   }
 }
