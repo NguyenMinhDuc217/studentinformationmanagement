@@ -81,7 +81,7 @@ class _RegisterState extends State<Register> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     onPressed: () {},
                     child: Text(
-                      "Đăng Ký",
+                      "Lưu",
                       style: TextStyle(color: Colors.blue, fontSize: 18),
                     ),
                   ),
