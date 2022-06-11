@@ -25,7 +25,7 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 200),
-                child: Text('Đăng ký',
+                child: Text('Quên mật khẩu',
                     style: TextStyle(color: Colors.black, fontSize: 30)),
               ),
               Padding(
