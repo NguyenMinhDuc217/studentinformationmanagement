@@ -76,7 +76,12 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
+                    },
                     child: Text(
                       "Đăng Nhập",
                       style: TextStyle(color: Colors.blue, fontSize: 18),

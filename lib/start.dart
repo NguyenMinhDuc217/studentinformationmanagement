@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:student_information_management/login.dart';
 import 'package:student_information_management/homepage.dart';
+import 'package:student_information_management/register.dart';
 
 class StarPage extends StatefulWidget {
   const StarPage({Key? key}) : super(key: key);
@@ -76,7 +77,7 @@ class _StarPageState extends State<StarPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => const Register()));
                     },
                     child: Text(
                       "Đăng ký",
