@@ -24,8 +24,8 @@ class _RegisterState extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 200),
-                child: Text('Quên mật khẩu',
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+                child: Text('Thông tin đăng ký',
                     style: TextStyle(color: Colors.black, fontSize: 30)),
               ),
               Padding(
@@ -35,7 +35,7 @@ class _RegisterState extends State<Register> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    labelText: "Nhập mật khẩu cũ",
+                    labelText: "Tên đăng nhập",
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black)),
                     labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
@@ -49,7 +49,7 @@ class _RegisterState extends State<Register> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    labelText: "Nhập mật khẩu mới",
+                    labelText: "Mật khẩu",
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black)),
                     labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
@@ -63,7 +63,35 @@ class _RegisterState extends State<Register> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    labelText: "Xác nhận mật khẩu mới",
+                    labelText: "Nhập lại mật khẩu",
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                child: TextField(
+                  style: TextStyle(fontSize: 18, color: Colors.black54),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: "Số điện thoại",
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                child: TextField(
+                  style: TextStyle(fontSize: 18, color: Colors.black54),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: "Email",
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black)),
                     labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
@@ -81,7 +109,7 @@ class _RegisterState extends State<Register> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     onPressed: () {},
                     child: Text(
-                      "Lưu",
+                      "Đăng ký",
                       style: TextStyle(color: Colors.blue, fontSize: 18),
                     ),
                   ),
