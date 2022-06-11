@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_information_management/changepassword.dart';
 import 'package:student_information_management/homepage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
                 child: Container(
                   width: 1200,
                   height: 200,
@@ -84,6 +85,28 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       "Đăng Nhập",
+                      style: TextStyle(color: Colors.blue, fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50, 0, 50, 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: RaisedButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Chanepassword()));
+                    },
+                    child: Text(
+                      "Quên mật khẩu",
                       style: TextStyle(color: Colors.blue, fontSize: 18),
                     ),
                   ),
