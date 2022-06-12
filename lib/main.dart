@@ -1,14 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:student_information_management/department.dart';
+import 'package:student_information_management/errorlogin.dart';
 import 'package:student_information_management/homepage.dart';
 import 'package:student_information_management/login.dart';
 import 'package:student_information_management/notification.dart';
 import 'package:student_information_management/post.dart';
+import 'package:student_information_management/start.dart';
 
-
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(title: ('Student Information management')),
+      home: StarPage(),
     );
   }
 }

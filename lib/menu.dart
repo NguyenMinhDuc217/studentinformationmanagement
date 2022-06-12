@@ -1,5 +1,6 @@
   import 'package:flutter/material.dart';
 import 'package:student_information_management/department.dart';
+import 'package:student_information_management/login.dart';
 import 'package:student_information_management/notification.dart';
 import 'package:student_information_management/post.dart';
 import 'package:student_information_management/search.dart';
@@ -65,6 +66,11 @@ class _MenuPagePageState extends State<MenuPage> {
             title: const Text('Cài đặt'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage()));
+            },
+          ),ListTile(
+            title: const Text('Đăng xuất'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             },
           ),
         ],

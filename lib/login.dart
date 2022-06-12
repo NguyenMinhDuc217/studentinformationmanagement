@@ -1,13 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:student_information_management/changepassword.dart';
+import 'package:student_information_management/errorlogin.dart';
 import 'package:student_information_management/homepage.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
+  const LoginPage({Key? key}) : super(key: key);
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -16,43 +17,119 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              obscureText: false,
-              controller: _controller1,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Tên đăng nhập',
+      home: Scaffold(
+        body: Container(
+          padding: EdgeInsets.fromLTRB(30, 0, 30, 40),
+          //constraints: BoxConstraints.expand(),
+          color: Colors.blue,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+                child: Container(
+                  width: 1200,
+                  height: 200,
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      //shape: BoxShape.circle,
+                      //color: Colors.grey,
+                      ),
+                  child: CircleAvatar(
+                    radius: 60,
+                    backgroundImage: AssetImage('images/logo.jpg'),
+                  ),
+                ),
               ),
-            ),
-            TextField(
-              obscureText: true,
-              controller: _controller2,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                child: TextField(
+                  style: TextStyle(fontSize: 18, color: Colors.purple),
+                  controller: _controller1,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: "Tài Khoản",
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
+                  ),
+                ),
               ),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                child: TextField(
+                  style: TextStyle(fontSize: 18, color: Colors.black54),
+                  controller: _controller2,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: "Mật khẩu",
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
+                  ),
+                ),
               ),
-              onPressed: () {
-                if (_controller1.text == _controller2.text) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                }
-              },
-              child: Text('Đăng nhập'),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50, 0, 50, 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: RaisedButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    onPressed: () {
+                      if (_controller1 == _controller2) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                      }
+                      else{
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ErrorLoginPage()));
+                      }
+                    },
+                    child: Text(
+                      "Đăng Nhập",
+                      style: TextStyle(color: Colors.blue, fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50, 0, 50, 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: RaisedButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Chanepassword()));
+                    },
+                    child: Text(
+                      "Quên mật khẩu",
+                      style: TextStyle(color: Colors.blue, fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

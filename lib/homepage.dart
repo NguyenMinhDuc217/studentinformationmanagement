@@ -5,10 +5,10 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePagePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePagePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Widget _menu = MenuPage();
@@ -132,8 +132,11 @@ class _HomePagePageState extends State<HomePage> {
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
             ),
-            onPressed: (){},
-            child: Text('Thông tin liên lạc', style: TextStyle(color: Colors.blue[900]),),
+            onPressed: () {},
+            child: Text(
+              'Thông tin liên lạc',
+              style: TextStyle(color: Colors.blue[900]),
+            ),
           ),
         )
       ],
