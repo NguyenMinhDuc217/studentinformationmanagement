@@ -1,6 +1,9 @@
   import 'package:flutter/material.dart';
+import 'package:student_information_management/department.dart';
 import 'package:student_information_management/notification.dart';
 import 'package:student_information_management/post.dart';
+import 'package:student_information_management/search.dart';
+import 'package:student_information_management/setting.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -16,11 +19,25 @@ class _MenuPagePageState extends State<MenuPage> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
+           DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: Text('MENU'),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/murano.jpg'),
+                ),
+                Text('Nguyễn Minh Đức', style: TextStyle(color: Colors.white, fontSize: 20)),
+              ],
+            ),
+          ),
+          ListTile(
+            title: const Text('Tìm kiếm'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+            },
           ),
           ListTile(
             title: const Text('Danh sách bài viết'),
@@ -36,7 +53,9 @@ class _MenuPagePageState extends State<MenuPage> {
           ),
           ListTile(
             title: const Text('Khoa'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DepartmentPage()));
+            },
           ),
           ListTile(
             title: const Text('Phòng'),
@@ -44,7 +63,9 @@ class _MenuPagePageState extends State<MenuPage> {
           ),
           ListTile(
             title: const Text('Cài đặt'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage()));
+            },
           ),
         ],
       ),

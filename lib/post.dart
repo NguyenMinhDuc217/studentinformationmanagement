@@ -155,6 +155,13 @@ class _PostPagePageState extends State<PostPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('LOGO'),
+        actions: [
+          TextButton(
+            onPressed: (){
+            Navigator.pop(context);
+          }, 
+          child: Text('Quay lại', style: TextStyle(color: Colors.white)))
+        ]
       ),
       body: SingleChildScrollView(
         child: Column(

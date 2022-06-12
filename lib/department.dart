@@ -21,7 +21,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
       ),
       alignment: Alignment.center,
       margin: EdgeInsets.only(top: 30, bottom: 20),
-      child: Text('Thông báo',
+      child: Text('Khoa',
           style: TextStyle(fontSize: 20, color: Colors.white)),
     );
     Widget _listpost = Container(
@@ -176,6 +176,13 @@ class _DepartmentPageState extends State<DepartmentPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('LOGO'),
+        actions: [
+          TextButton(
+            onPressed: (){
+            Navigator.pop(context);
+          }, 
+          child: Text('Quay lại', style: TextStyle(color: Colors.white)))
+        ]
       ),
       body: SingleChildScrollView(
         child: Column(

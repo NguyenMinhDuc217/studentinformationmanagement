@@ -137,6 +137,31 @@ class _HomePagePageState extends State<HomePage> {
           ),
         )
       ],
+      // bottomNavigationBar: Container(
+      //   child: BottomNavigationBar(
+      //   type: BottomNavigationBarType.fixed,
+      //   currentIndex: selectedIndex,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Trang chủ',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.edit_location),
+      //       label: 'Tìm kiếm',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.edit_location_outlined),
+      //       label: 'Thông báo',
+      //     ),
+      //   ],
+      //   onTap: (value) {
+      //     setState(() {
+      //       selectedIndex = value;
+      //     });
+      //   },
+      // ),
+      // )
     );
   }
 }
