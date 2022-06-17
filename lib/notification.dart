@@ -50,13 +50,13 @@ class _NotificationPagePageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Widget _search = ListTile(
-    //   title: TextField(
-    //     onChanged: (value) => find(value),
-    //     decoration: const InputDecoration(
-    //         labelText: 'Search', suffixIcon: Icon(Icons.search)),
-    //   ),
-    // );
+    Widget _search = ListTile(
+      title: TextField(
+        onChanged: (value) => find(value),
+        decoration: const InputDecoration(
+            labelText: 'Search', suffixIcon: Icon(Icons.search)),
+      ),
+    );
     Widget _notification = Container(
       width: 200,
       height: 30,
@@ -149,6 +149,7 @@ class _NotificationPagePageState extends State<NotificationPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            _search,
             _listnotification,
           ],
         ),
