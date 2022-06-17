@@ -1,0 +1,22 @@
+{
+    "posts" : [
+        {
+            "id" : "0",
+            "image" : "newyork.jpg" ,
+            "title" : "Flutter",
+            "content" : "Một tính năng đáng chú ý của nền tảng Dart là hỗ trợ 'tải lại nóng'(hot reload) trong đó các sửa đổi trong tập tin nguồn có thể được chèn vào ứng dụng đang chạy. Flutter mở rộng sự hỗ trợ này cho tính năng'tải lại nóng giữ trạng thái (stateful hot reload), để các sửa đổi trong mã nguồn có thể được cập nhật ngay lập tức lên ứng dụng đang chạy mà không cần phải khởi động lại hoặc mất mát các trạng thái đang có.[11] This feature as implemented in Flutter has received widespread praise."
+        },
+        {
+            "id" : "1",
+            "image" : "murano.jpg" ,
+            "title" : "Dart",
+            "content" : "Dart là một ngôn ngữ lập trình web do Google phát triển. Nó được chính thức công bố tại Hội thảo GOTO Lưu trữ 2012-12-21 tại Wayback Machine ngày 10-12 tháng 10 năm 2011 tại Aarhus.[1] Mục đích của Dart không phải để thay thế JavaScript như là ngôn ngữ kịch bản chính bên trong trình duyệt web, mà là cung cấp sự lựa chọn hiện đại hơn.[2]"
+        },
+        {
+            "id" : "2",
+            "image" : "paris.jpg" ,
+            "title" : "React Native",
+            "content" : "React Native là một framework mã nguồn mở được sáng tạo bởi Facebook.[3] Nó được sử dụng để phát triển ứng dụng di động Android[4], iOS, Web[5] và UWP[6] bằng cách cho phép các nhà phát triển sử dụng React cùng với môi trường ứng dụng gốc (native)."
+        }
+    ]
+}
