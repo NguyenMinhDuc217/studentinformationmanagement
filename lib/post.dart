@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:student_information_management/detailpost.dart';
 import 'package:student_information_management/menu.dart';
 import 'package:student_information_management/model/post.dart';
 
@@ -130,12 +131,17 @@ class _PostPagePageState extends State<PostPage> {
                   radius: 50,
                   backgroundImage: AssetImage('assets/images/'+_lstfindpost[index]['image'].toString()),
                 ),
-                onTap: () {},
+                onTap: () {
+                  // print(_lstfindpost[index]["id"]);
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage(postId: _lstfindpost[index]["id"].toString())));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
+                },
               ),
             );
           }),
     );
     return Scaffold(
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
