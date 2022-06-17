@@ -8,6 +8,7 @@ class Post {
   String content;
   int like;
 
+
   Post(this.id, this.image, this.title, this.content, this.like);
   
 

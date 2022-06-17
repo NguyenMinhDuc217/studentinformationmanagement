@@ -9,6 +9,7 @@ import 'package:student_information_management/menu.dart';
 import 'package:student_information_management/model/post.dart';
 import 'package:student_information_management/notification.dart';
 import 'package:student_information_management/post.dart';
+import 'package:student_information_management/search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,9 +19,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    List _post = [];
-    late Post posttrending;
-    int maxlike = 0;
+  List _post = [];
+  late Post posttrending;
+  int maxlike = 0;
 
   // Fetch content from the json file
   Future<void> readJson() async {
@@ -28,13 +29,12 @@ class _HomePageState extends State<HomePage> {
     final data = await json.decode(response);
     setState(() {
       _post = data["posts"];
-      for(var i = 0; i<_post.length;i++){
-        if(int.parse(_post[maxlike]["like"]) <= int.parse(_post[i]["like"])){
+      for (var i = 0; i < _post.length; i++) {
+        if (int.parse(_post[maxlike]["like"]) <= int.parse(_post[i]["like"])) {
           maxlike = i;
         }
       }
     });
-    
   }
 
   @override
@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     this.readJson();
   }
+
   @override
   Widget build(BuildContext context) {
     Widget _slide = ListView(
@@ -99,12 +100,20 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.all(10),
       width: 300,
       height: 100,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(_post[maxlike]["title"], style: TextStyle(color: Colors.black)),
-          Text(_post[maxlike]["content"].toString().substring(0,100) + '...', style: TextStyle(color: Colors.white)),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SearchPage()));
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(_post[maxlike]["title"],
+                style: TextStyle(color: Colors.black)),
+            Text(_post[maxlike]["content"].toString().substring(0, 100) + '...',
+                style: TextStyle(color: Colors.white)),
+          ],
+        ),
       ),
     );
     Widget _notification = Container(

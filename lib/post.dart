@@ -1,4 +1,4 @@
-import 'dart:async';
+// import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -104,7 +104,27 @@ class _PostPagePageState extends State<PostPage> {
                       width: 1,
                     )),
                   ),
-                  child: Text(_lstfindpost[index]['content'].toString()),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(_lstfindpost[index]['canseemore'] ? _lstfindpost[index]['content'].toString().substring(0,100) : _lstfindpost[index]['content'].toString(),
+                            style: TextStyle(color: Colors.grey)),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (_lstfindpost[index]['canseemore'] == true) {
+                            _lstfindpost[index]['canseemore'] = false;
+                          } else {
+                            _lstfindpost[index]['canseemore'] = true;
+                          }
+                          setState(() {});
+                        },
+                        child: Text(_lstfindpost[index]['canseemore'] ? 'Xem tiếp' : 'Rút gọn',
+                            style: TextStyle(color: Colors.blue)),
+                      )
+                    ],
+                  ),
+                  // child: Text(_lstfindpost[index]['content'].toString()),
                 ),
                 leading: CircleAvatar(
                   radius: 50,
