@@ -15,13 +15,15 @@ class _NotificationPagePageState extends State<NotificationPage> {
   String short2 = 'Dart là một ngôn ngữ lập trình web do Google phát triển.';
   String full3 = 'React Native là một framework mã nguồn mở được sáng tạo bởi Facebook.[3] Nó được sử dụng để phát triển ứng dụng di động Android[4], iOS, Web[5] và UWP[6] bằng cách cho phép các nhà phát triển sử dụng React cùng với môi trường ứng dụng gốc (native).';
   String short3 = 'React Native là một framework mã nguồn mở được sáng tạo bởi Facebook.';
-  String seemore1 ='xem tiếp';
-  String seemore2 ='xem tiếp';
-  String seemore3 ='xem tiếp';
-  bool click=false;
+  String seemore1 = 'xem tiếp';
+  String seemore2 = 'xem tiếp';
+  String seemore3 = 'xem tiếp';
+  bool canseemore1 = true;
+  bool canseemore2 = true;
+  bool canseemore3 = true;
+
   @override
   Widget build(BuildContext context) {
-    Widget _menu = MenuPage();
     Widget _notification = Container(
       width: 200,
       height: 30,
@@ -60,33 +62,34 @@ class _NotificationPagePageState extends State<NotificationPage> {
               child: Text('Flutter'),
             ),
             subtitle: Container(
-              padding: EdgeInsets.only(left: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    left: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
+                padding: EdgeInsets.only(left: 5),
+                decoration: BoxDecoration(
+                  border: Border(
+                      left: BorderSide(
+                    color: Colors.grey,
+                    width: 1,
+                  )),
+                ),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(canseemore1 ? short1 : full1,
+                          style: TextStyle(color: Colors.grey)),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (canseemore1 == true) {
+                          canseemore1 = false;
+                        } else {
+                          canseemore1 = true;
+                        }
+                        setState(() {});
+                      },
+                      child: Text(canseemore1 ? seemore1 : 'Rút gọn',
+                          style: TextStyle(color: Colors.blue)),
+                    )
+                  ],
                 )),
-              ),
-              child: Row(
-                children: [
-                  Flexible(child: Text(short1,style: TextStyle(color: Colors.grey)),),
-                  TextButton(
-                    onPressed: (){
-                      if(click==false){
-                        short1=full1;
-                        seemore1='rút gọn';
-                        click==true;
-                      }
-                      else if(click==true){
-                        short1=='';
-                      }
-                      setState(() {});
-                    }, child: Text(seemore1,style: TextStyle(color: Colors.blue)),
-                  )
-                ],
-              )
-            ),
             leading: CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/images/murano.jpg'),
@@ -116,29 +119,33 @@ class _NotificationPagePageState extends State<NotificationPage> {
               child: Text('Dart'),
             ),
             subtitle: Container(
-              padding: EdgeInsets.only(left: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    left: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
+                padding: EdgeInsets.only(left: 5),
+                decoration: BoxDecoration(
+                  border: Border(
+                      left: BorderSide(
+                    color: Colors.grey,
+                    width: 1,
+                  )),
+                ),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(canseemore1 ? short2 : full2, style: TextStyle(color: Colors.grey)),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (canseemore2 == true) {
+                          canseemore2 = false;
+                        } else {
+                          canseemore2 = true;
+                        }
+                        setState(() {});
+                      },
+                      child:
+                          Text(canseemore2 ? seemore2 : 'Rút gọn', style: TextStyle(color: Colors.blue)),
+                    )
+                  ],
                 )),
-              ),
-              child: Row(
-                children: [
-                  Flexible(child: Text(short2,style: TextStyle(color: Colors.grey)),),
-                  TextButton(
-                    onPressed: (){
-                      if(click==false){
-                        short2=full2;
-                        seemore2='';
-                      }
-                      setState(() {});
-                    }, child: Text(seemore2,style: TextStyle(color: Colors.blue)),
-                  )
-                ],
-              )
-            ),
             leading: CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/images/venice.jpg'),
@@ -168,29 +175,33 @@ class _NotificationPagePageState extends State<NotificationPage> {
               child: Text('Dart'),
             ),
             subtitle: Container(
-              padding: EdgeInsets.only(left: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    left: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
+                padding: EdgeInsets.only(left: 5),
+                decoration: BoxDecoration(
+                  border: Border(
+                      left: BorderSide(
+                    color: Colors.grey,
+                    width: 1,
+                  )),
+                ),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(canseemore3 ? short3 : full3, style: TextStyle(color: Colors.grey)),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (canseemore3 == true) {
+                          canseemore3 = false;
+                        } else {
+                          canseemore3 = true;
+                        }
+                        setState(() {});
+                      },
+                      child:
+                          Text(canseemore3 ? seemore3 : 'Rút gọn', style: TextStyle(color: Colors.blue)),
+                    )
+                  ],
                 )),
-              ),
-              child: Row(
-                children: [
-                  Flexible(child: Text(short2,style: TextStyle(color: Colors.grey)),),
-                  TextButton(
-                    onPressed: (){
-                      if(click==false){
-                        short3=full3;
-                        seemore3='';
-                      }
-                      setState(() {});
-                    }, child: Text(seemore3,style: TextStyle(color: Colors.blue)),
-                  )
-                ],
-              )
-            ),
             leading: CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/images/paris.jpg'),
@@ -201,18 +212,6 @@ class _NotificationPagePageState extends State<NotificationPage> {
       ]),
     );
     return Scaffold(
-      drawer: _menu,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('LOGO'),
-        actions: [
-          TextButton(
-            onPressed: (){
-            Navigator.pop(context);
-          }, 
-          child: Text('Quay lại', style: TextStyle(color: Colors.white)))
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -221,14 +220,6 @@ class _NotificationPagePageState extends State<NotificationPage> {
           ],
         ),
       ),
-      // body: Center(
-      //   child: Column(
-      //     children: [
-      //       _post,
-      //       _listpost,
-      //     ],
-      //   ),
-      // ),
       persistentFooterButtons: [
         Container(
           width: 900,

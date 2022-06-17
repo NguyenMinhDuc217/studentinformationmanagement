@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_information_management/menu.dart';
+import 'package:student_information_management/model/post.dart';
+
 
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
@@ -9,9 +11,9 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPagePageState extends State<PostPage> {
+  List<Post> lstPost = [] ;
   @override
   Widget build(BuildContext context) {
-    Widget _menu = MenuPage();
     Widget _post = Container(
       width: 200,
       height: 30,
@@ -151,18 +153,6 @@ class _PostPagePageState extends State<PostPage> {
       ]),
     );
     return Scaffold(
-      drawer: _menu,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('LOGO'),
-        actions: [
-          TextButton(
-            onPressed: (){
-            Navigator.pop(context);
-          }, 
-          child: Text('Quay lại', style: TextStyle(color: Colors.white)))
-        ]
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

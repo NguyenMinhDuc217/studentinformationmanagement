@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:student_information_management/changepassword.dart';
 import 'package:student_information_management/errorlogin.dart';
 import 'package:student_information_management/homepage.dart';
+import 'package:student_information_management/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,7 +24,8 @@ class _LoginPageState extends State<LoginPage> {
         primarySwatch: Colors.purple,
       ),
       home: Scaffold(
-        body: Container(
+          body: SingleChildScrollView(
+        child: Container(
           padding: EdgeInsets.fromLTRB(30, 0, 30, 40),
           //constraints: BoxConstraints.expand(),
           color: Colors.blue,
@@ -86,10 +88,12 @@ class _LoginPageState extends State<LoginPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     onPressed: () {
-                      if (_controller1 == _controller2) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-                      }
-                      else{
+                      if (_controller1.text == _controller2.text && _controller1.text != '') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FirstPage()));
+                      } else {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -128,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

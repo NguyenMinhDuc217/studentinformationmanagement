@@ -41,18 +41,6 @@ class _MenuPagePageState extends State<MenuPage> {
             },
           ),
           ListTile(
-            title: const Text('Danh sách bài viết'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PostPage()));
-            },
-          ),
-          ListTile(
-            title: const Text('Thông báo'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage()));
-            },
-          ),
-          ListTile(
             title: const Text('Khoa'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => DepartmentPage()));

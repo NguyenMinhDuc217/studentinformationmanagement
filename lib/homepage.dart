@@ -1,5 +1,10 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:student_information_management/menu.dart';
+import 'package:student_information_management/model/post.dart';
+import 'package:student_information_management/notification.dart';
+import 'package:student_information_management/post.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,7 +16,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Widget _menu = MenuPage();
     Widget _slide = ListView(
         scrollDirection: Axis.horizontal,
         children: List.generate(3, (i) {
@@ -97,10 +101,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
     return Scaffold(
-      drawer: _menu,
-      appBar: AppBar(
-        title: Text('LOGO'),
-      ),
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -140,31 +140,6 @@ class _HomePageState extends State<HomePage> {
           ),
         )
       ],
-      // bottomNavigationBar: Container(
-      //   child: BottomNavigationBar(
-      //   type: BottomNavigationBarType.fixed,
-      //   currentIndex: selectedIndex,
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Trang chủ',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.edit_location),
-      //       label: 'Tìm kiếm',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.edit_location_outlined),
-      //       label: 'Thông báo',
-      //     ),
-      //   ],
-      //   onTap: (value) {
-      //     setState(() {
-      //       selectedIndex = value;
-      //     });
-      //   },
-      // ),
-      // )
     );
   }
 }
