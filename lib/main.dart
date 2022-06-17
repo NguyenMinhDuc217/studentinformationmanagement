@@ -51,7 +51,7 @@ class _FirstPageState extends State<FirstPage> {
     return Scaffold(
       drawer: MenuPage(),
       appBar: AppBar(
-        title: Text('LOGO'),
+        title: Text('NEWS'),
       ),
       body: pageList[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

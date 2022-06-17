@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:student_information_management/menu.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -9,21 +12,51 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPagePageState extends State<NotificationPage> {
-  String full1 = 'Một tính năng đáng chú ý của nền tảng Dart là hỗ trợ"tải lại nóng"(hot reload) trong đó các sửa đổi trong tập tin nguồn có thể được chèn vào ứng dụng đang chạy. Flutter mở rộng sự hỗ trợ này cho tính năng"tải lại nóng giữ trạng thái (stateful hot reload), để các sửa đổi trong mã nguồn có thể được cập nhật ngay lập tức lên ứng dụng đang chạy mà không cần phải khởi động lại hoặc mất mát các trạng thái đang có.[11] This feature as implemented in Flutter has received widespread praise.';
-  String short1 = 'Một tính năng đáng chú ý của nền tảng Dart là hỗ trợ"tải lại nóng"(hot reload) trong đó các sửa đổi trong tập tin nguồn có thể được chèn vào ứng dụng đang chạy.';
-  String full2 = 'Dart là một ngôn ngữ lập trình web do Google phát triển. Nó được chính thức công bố tại Hội thảo GOTO Lưu trữ 2012-12-21 tại Wayback Machine ngày 10-12 tháng 10 năm 2011 tại Aarhus.[1] Mục đích của Dart không phải để thay thế JavaScript như là ngôn ngữ kịch bản chính bên trong trình duyệt web, mà là cung cấp sự lựa chọn hiện đại hơn.[2]';
-  String short2 = 'Dart là một ngôn ngữ lập trình web do Google phát triển.';
-  String full3 = 'React Native là một framework mã nguồn mở được sáng tạo bởi Facebook.[3] Nó được sử dụng để phát triển ứng dụng di động Android[4], iOS, Web[5] và UWP[6] bằng cách cho phép các nhà phát triển sử dụng React cùng với môi trường ứng dụng gốc (native).';
-  String short3 = 'React Native là một framework mã nguồn mở được sáng tạo bởi Facebook.';
-  String seemore1 = 'xem tiếp';
-  String seemore2 = 'xem tiếp';
-  String seemore3 = 'xem tiếp';
-  bool canseemore1 = true;
-  bool canseemore2 = true;
-  bool canseemore3 = true;
+  List _lstnotification = [];
+  List _lstfindnotification = [];
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('db/post.json');
+    final data = await json.decode(response);
+    setState(() {
+      _lstnotification = data["notifications"];
+      _lstfindnotification = _lstnotification;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.readJson();
+  }
+
+  void find(String _searchPost) {
+    List _result = [];
+    if (_searchPost.isEmpty || _searchPost == "") {
+      _result = _lstnotification.toList();
+      print(_result);
+    } else {
+      _result = _lstnotification
+          .where((notification) => notification["title"]
+              .toLowerCase()
+              .contains(_searchPost.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _lstfindnotification = _result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Widget _search = ListTile(
+    //   title: TextField(
+    //     onChanged: (value) => find(value),
+    //     decoration: const InputDecoration(
+    //         labelText: 'Search', suffixIcon: Icon(Icons.search)),
+    //   ),
+    // );
     Widget _notification = Container(
       width: 200,
       height: 30,
@@ -37,185 +70,85 @@ class _NotificationPagePageState extends State<NotificationPage> {
           style: TextStyle(fontSize: 20, color: Colors.white)),
     );
     Widget _listnotification = Container(
-      margin: EdgeInsets.only(left: 50, right: 50),
-      height: 500,
-      child: ListView(children: [
-        Container(
-          margin: EdgeInsets.only(bottom: 30),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 2.0,
-              color: Colors.blue,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              margin: EdgeInsets.only(bottom: 5),
+        margin: EdgeInsets.only(left: 50, top: 30, right: 50),
+        height: 500,
+        child: ListView.builder(
+          itemCount: _lstfindnotification.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              margin: EdgeInsets.only(bottom: 30),
               decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
+                border: Border.all(
+                  width: 2.0,
                   color: Colors.blue,
-                  width: 2,
-                )),
-              ),
-              child: Text('Flutter'),
-            ),
-            subtitle: Container(
-                padding: EdgeInsets.only(left: 5),
-                decoration: BoxDecoration(
-                  border: Border(
-                      left: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  )),
                 ),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(canseemore1 ? short1 : full1,
-                          style: TextStyle(color: Colors.grey)),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        if (canseemore1 == true) {
-                          canseemore1 = false;
-                        } else {
-                          canseemore1 = true;
-                        }
-                        setState(() {});
-                      },
-                      child: Text(canseemore1 ? seemore1 : 'Rút gọn',
-                          style: TextStyle(color: Colors.blue)),
-                    )
-                  ],
-                )),
-            leading: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/images/murano.jpg'),
-            ),
-            onTap: () {},
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 30),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 2.0,
-              color: Colors.blue,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              margin: EdgeInsets.only(bottom: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-                  color: Colors.blue,
-                  width: 2,
-                )),
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('Dart'),
-            ),
-            subtitle: Container(
-                padding: EdgeInsets.only(left: 5),
-                decoration: BoxDecoration(
-                  border: Border(
-                      left: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  )),
+              child: ListTile(
+                title: Container(
+                  margin: EdgeInsets.only(bottom: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                      color: Colors.blue,
+                      width: 2,
+                    )),
+                  ),
+                  child: Text(_lstfindnotification[index]['title'].toString()),
                 ),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(canseemore1 ? short2 : full2, style: TextStyle(color: Colors.grey)),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        if (canseemore2 == true) {
-                          canseemore2 = false;
-                        } else {
-                          canseemore2 = true;
-                        }
-                        setState(() {});
-                      },
-                      child:
-                          Text(canseemore2 ? seemore2 : 'Rút gọn', style: TextStyle(color: Colors.blue)),
-                    )
-                  ],
-                )),
-            leading: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/images/venice.jpg'),
-            ),
-            onTap: () {},
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 30),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 2.0,
-              color: Colors.blue,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              margin: EdgeInsets.only(bottom: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-                  color: Colors.blue,
-                  width: 2,
-                )),
+                subtitle: Container(
+                  padding: EdgeInsets.only(left: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        left: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    )),
+                  ),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                            _lstfindnotification[index]['canseemore']
+                                ? _lstfindnotification[index]['content']
+                                    .toString()
+                                    .substring(0, 100)
+                                : _lstfindnotification[index]['content']
+                                    .toString(),
+                            style: TextStyle(color: Colors.grey)),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (_lstfindnotification[index]['canseemore'] ==
+                              true) {
+                            _lstfindnotification[index]['canseemore'] = false;
+                          } else {
+                            _lstfindnotification[index]['canseemore'] = true;
+                          }
+                          setState(() {});
+                        },
+                        child: Text(
+                            _lstfindnotification[index]['canseemore']
+                                ? 'Xem tiếp'
+                                : 'Rút gọn',
+                            style: TextStyle(color: Colors.blue)),
+                      )
+                    ],
+                  ),
+                ),
+                leading: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/'+_lstfindnotification[index]['image'].toString()),
+                ),
+                onTap: () {},
               ),
-              child: Text('Dart'),
-            ),
-            subtitle: Container(
-                padding: EdgeInsets.only(left: 5),
-                decoration: BoxDecoration(
-                  border: Border(
-                      left: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  )),
-                ),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(canseemore3 ? short3 : full3, style: TextStyle(color: Colors.grey)),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        if (canseemore3 == true) {
-                          canseemore3 = false;
-                        } else {
-                          canseemore3 = true;
-                        }
-                        setState(() {});
-                      },
-                      child:
-                          Text(canseemore3 ? seemore3 : 'Rút gọn', style: TextStyle(color: Colors.blue)),
-                    )
-                  ],
-                )),
-            leading: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/images/paris.jpg'),
-            ),
-            onTap: () {},
-          ),
-        ),
-      ]),
-    );
+            );
+          },
+        ));
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _notification,
             _listnotification,
           ],
         ),

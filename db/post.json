@@ -24,5 +24,31 @@
             "like" : "30",
             "canseemore" : true
         }
+    ],
+    "notifications" : [
+        {
+            "id" : "0",
+            "image" : "tb_olympic_ta.jpg" ,
+            "title" : "Cuộc thi Olympic tiếng anh",
+            "content" : "Chương trình do Ban Thường vụ Tỉnh đoàn, Ban Thư ký Hội Sinh viên tỉnh tổ chức dưới hình thức thi trắc nghiệm trực tuyến cho Vòng loại, và thi thuyết trình cho Vòng Chung kết. Cuộc thi dành cho đối tượng học sinh, sinh viên trong các trường THPT, trung tâm giáo dục dạy nghề, các trường cao đẳng, đại học. Bài thi được xây dựng theo dạng IELTS giản lược với nội dung tiếng Anh thường thức, các kiến thức cơ bản về lịch sử, văn hóa, xã hội, con người Việt Nam.",
+            "like" : "45",
+            "canseemore" : true
+        },
+        {
+            "id" : "1",
+            "image" : "tb_olympic_th.jpg" ,
+            "title" : "Cuộc thi Olympic tin học",
+            "content" : "Olympic Tin học Sinh viên Việt Nam (OLP) là sáng kiến của Hội Tin học Việt Nam, Hội Sinh viên Việt Nam và Bộ Giáo dục và Đào tạo nhằm động viên phong trào học tập tin học và khuyến khích các tài năng tin học trẻ. Bắt đầu từ năm 1992, Kỳ thi đã được tổ chức định kỳ hàng năm với sự tham gia của đông đảo sinh viên các trường Đại học và Cao đẳng trong cả nước. ",
+            "like" : "60",
+            "canseemore" : true
+        },
+        {
+            "id" : "2",
+            "image" : "tb_olympic_toan.jpg" ,
+            "title" : "React Native",
+            "content" : "22/24 học sinh lớp 5 và lớp 6 đến từ các trường tiểu học và THCS trên địa bàn Hà Nội giành huy chương tại kỳ thi Olympic Toán và Khoa học quốc tế (IMSO 2021).Tại lễ bế mạc IMSO 2021 - cuộc thi quốc tế uy tín nhất dành cho học sinh dưới 13 tuổi, được nước chủ nhà Indonesia tổ chức trực tuyến ngày 19/12 - học sinh Việt Nam được xướng tên ở phần trao huy chương bạc và đồng. Với môn Toán, 6 em giành huy chương bạc và 6 em giành giải đồng. Với môn Khoa học, đội tuyển Việt Nam giành 3 huy chương bạc và 7 đồng.",
+            "like" : "100",
+            "canseemore" : true
+        }
     ]
 }
