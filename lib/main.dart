@@ -7,6 +7,7 @@ import 'package:student_information_management/homepage.dart';
 import 'package:student_information_management/login.dart';
 import 'package:student_information_management/notification.dart';
 import 'package:student_information_management/post.dart';
+import 'package:student_information_management/setting.dart';
 import 'package:student_information_management/start.dart';
 
 void main() => runApp(MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ErrorLoginPage(),
+      home: StarPage(),
     );
   }
 }
