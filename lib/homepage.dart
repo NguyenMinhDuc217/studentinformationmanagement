@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Widget _slide = ListView(
         scrollDirection: Axis.horizontal,
-        children: List.generate(3, (i) {
+        children: List.generate(_post.length, (i) {
           return GestureDetector(
             onTap: () {},
             child: Stack(
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.asset(
-                      'assets/images/newyork.jpg',
+                      'assets/images/'+_post[i]['image'].toString(),
                       width: 200,
                       height: 300,
                       fit: BoxFit.fitHeight,
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Bài viết ' + (i + 1).toString(),
+                        Text(_post[i]['title'].toString(),
                             style:
                                 TextStyle(fontSize: 18, color: Colors.white)),
                       ],
