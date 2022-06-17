@@ -128,9 +128,7 @@ class _NotificationPagePageState extends State<NotificationPage> {
                           setState(() {});
                         },
                         child: Text(
-                            _lstfindnotification[index]['canseemore']
-                                ? 'Xem tiếp'
-                                : 'Rút gọn',
+                            _lstfindnotification[index]['canseemore']? 'Xem tiếp' : 'Rút gọn',
                             style: TextStyle(color: Colors.blue)),
                       )
                     ],
