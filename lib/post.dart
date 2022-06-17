@@ -38,10 +38,11 @@ class _PostPagePageState extends State<PostPage> {
 
   void find(String _searchPost){
     List _result = [];
-    if(_searchPost.isEmpty){
-      _result == _lstpost;
+    if(_searchPost.isEmpty || _searchPost == ""){
+      _result = _lstpost.toList();
+      print(_result);
     }else{
-      _result = _lstpost.where((post) => post["title"].contains(_searchPost)).toList();
+      _result = _lstpost.where((post) => post["title"].toLowerCase().contains(_searchPost.toLowerCase())).toList();
     }
     setState(() {
       _lstfindpost = _result;
