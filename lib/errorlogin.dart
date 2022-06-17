@@ -25,7 +25,7 @@ class _ErrorLoginPageState extends State<ErrorLoginPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
                 child: Container(
                   width: 1200,
                   height: 200,

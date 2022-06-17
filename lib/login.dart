@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:student_information_management/changepassword.dart';
+import 'package:student_information_management/errorlogin.dart';
 import 'package:student_information_management/homepage.dart';
+import 'package:student_information_management/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,6 +13,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _controller1 = TextEditingController();
+  final _controller2 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +24,8 @@ class _LoginPageState extends State<LoginPage> {
         primarySwatch: Colors.purple,
       ),
       home: Scaffold(
-        body: Container(
+          body: SingleChildScrollView(
+        child: Container(
           padding: EdgeInsets.fromLTRB(30, 0, 30, 40),
           //constraints: BoxConstraints.expand(),
           color: Colors.blue,
@@ -25,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
                 child: Container(
                   width: 1200,
                   height: 200,
@@ -41,8 +49,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: TextField(
+                  controller: _controller1,
                   style: TextStyle(fontSize: 18, color: Colors.purple),
                   decoration: InputDecoration(
                     filled: true,
@@ -57,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: TextField(
+                  controller: _controller2,
                   style: TextStyle(fontSize: 18, color: Colors.black54),
                   decoration: InputDecoration(
                     filled: true,
@@ -78,10 +88,17 @@ class _LoginPageState extends State<LoginPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                      if (_controller1.text == _controller2.text && _controller1.text != '') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FirstPage()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ErrorLoginPage()));
+                      }
                     },
                     child: Text(
                       "Đăng Nhập",
@@ -115,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

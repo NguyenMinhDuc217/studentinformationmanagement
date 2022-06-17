@@ -1,5 +1,15 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:student_information_management/menu.dart';
+import 'package:student_information_management/model/post.dart';
+import 'package:student_information_management/notification.dart';
+import 'package:student_information_management/post.dart';
+import 'package:student_information_management/search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,12 +19,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List _post = [];
+  List _notifications = [];
+  int maxlikepost = 0;
+  int maxlikenotification = 0;
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('db/post.json');
+    final data = await json.decode(response);
+    setState(() {
+      //post
+      _post = data["posts"];
+      for (var i = 0; i < _post.length; i++) {
+        if (int.parse(_post[maxlikepost]["like"]) <= int.parse(_post[i]["like"])) {
+          maxlikepost = i;
+        }
+      }
+      //notification
+      _notifications = data["notifications"];
+      for (var j = 0; j < _notifications.length; j++) {
+        if (int.parse(_notifications[maxlikepost]["like"]) <= int.parse(_notifications[j]["like"])) {
+          maxlikepost = j;
+        }
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.readJson();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget _menu = MenuPage();
     Widget _slide = ListView(
         scrollDirection: Axis.horizontal,
-        children: List.generate(3, (i) {
+        children: List.generate(_post.length, (i) {
           return GestureDetector(
             onTap: () {},
             child: Stack(
@@ -24,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.asset(
-                      'assets/images/newyork.jpg',
+                      'assets/images/'+_post[i]['image'].toString(),
                       width: 200,
                       height: 300,
                       fit: BoxFit.fitHeight,
@@ -37,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Bài viết ' + (i + 1).toString(),
+                        Text(_post[i]['title'].toString(),
                             style:
                                 TextStyle(fontSize: 18, color: Colors.white)),
                       ],
@@ -67,12 +109,20 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.all(10),
       width: 300,
       height: 100,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Tin tức nổi bật', style: TextStyle(color: Colors.black)),
-          Text('Nội dung', style: TextStyle(color: Colors.white)),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SearchPage()));
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(_post[maxlikepost]["title"],
+                style: TextStyle(color: Colors.black)),
+            Text(_post[maxlikepost]["content"].toString().substring(0, 100) + '...',
+                style: TextStyle(color: Colors.white)),
+          ],
+        ),
       ),
     );
     Widget _notification = Container(
@@ -88,19 +138,23 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.all(10),
       width: 300,
       height: 100,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Thông báo nổi bật', style: TextStyle(color: Colors.black)),
-          Text('Nội dung', style: TextStyle(color: Colors.white)),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SearchPage()));
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(_notifications[maxlikenotification]["title"],
+                style: TextStyle(color: Colors.black)),
+            Text(_notifications[maxlikenotification]["content"].toString().substring(0, 100) + '...',
+                style: TextStyle(color: Colors.white)),
+          ],
+        ),
       ),
     );
     return Scaffold(
-      drawer: _menu,
-      appBar: AppBar(
-        title: Text('LOGO'),
-      ),
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [

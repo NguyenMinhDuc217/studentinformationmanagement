@@ -1,5 +1,11 @@
+// import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:student_information_management/menu.dart';
+import 'package:student_information_management/model/post.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);
@@ -9,9 +15,47 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPagePageState extends State<PostPage> {
+  List _lstpost = [];
+  List _lstfindpost = [];
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('db/post.json');
+    final data = await json.decode(response);
+    setState(() {
+      _lstpost = data["posts"];
+      _lstfindpost = _lstpost;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.readJson();
+  }
+
+  void find(String _searchPost){
+    List _result = [];
+    if(_searchPost.isEmpty || _searchPost == ""){
+      _result = _lstpost.toList();
+      print(_result);
+    }else{
+      _result = _lstpost.where((post) => post["title"].toLowerCase().contains(_searchPost.toLowerCase())).toList();
+    }
+    setState(() {
+      _lstfindpost = _result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget _menu = MenuPage();
+    Widget _search = ListTile(
+      title: TextField(
+        onChanged: (value) => find(value),
+        decoration: const InputDecoration(
+            labelText: 'Search', suffixIcon: Icon(Icons.search)),
+      ),
+    );
     Widget _post = Container(
       width: 200,
       height: 30,
@@ -25,153 +69,82 @@ class _PostPagePageState extends State<PostPage> {
           style: TextStyle(fontSize: 20, color: Colors.white)),
     );
     Widget _listpost = Container(
-      margin: EdgeInsets.only(left: 50, right: 50),
+      margin: EdgeInsets.only(left: 50, top: 30, right: 50),
       height: 500,
-      child: ListView(children: [
-        Container(
-          margin: EdgeInsets.only(bottom: 30),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 2.0,
-              color: Colors.blue,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              margin: EdgeInsets.only(bottom: 5),
+      child: ListView.builder(
+          itemCount: _lstfindpost.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              margin: EdgeInsets.only(bottom: 30),
               decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
+                border: Border.all(
+                  width: 2.0,
                   color: Colors.blue,
-                  width: 2,
-                )),
+                ),
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('Flutter'),
-            ),
-            subtitle: Container(
-              padding: EdgeInsets.only(left: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    left: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                )),
+              child: ListTile(
+                title: Container(
+                  margin: EdgeInsets.only(bottom: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                      color: Colors.blue,
+                      width: 2,
+                    )),
+                  ),
+                  child: Text(_lstfindpost[index]['title']),
+                ),
+                subtitle: Container(
+                  padding: EdgeInsets.only(left: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        left: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    )),
+                  ),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(_lstfindpost[index]['canseemore'] ? _lstfindpost[index]['content'].toString().substring(0,100) : _lstfindpost[index]['content'].toString(),
+                            style: TextStyle(color: Colors.grey)),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (_lstfindpost[index]['canseemore'] == true) {
+                            _lstfindpost[index]['canseemore'] = false;
+                          } else {
+                            _lstfindpost[index]['canseemore'] = true;
+                          }
+                          setState(() {});
+                        },
+                        child: Text(_lstfindpost[index]['canseemore'] ? 'Xem tiếp' : 'Rút gọn',
+                            style: TextStyle(color: Colors.blue)),
+                      )
+                    ],
+                  ),
+                  // child: Text(_lstfindpost[index]['content'].toString()),
+                ),
+                leading: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/'+_lstfindpost[index]['image'].toString()),
+                ),
+                onTap: () {},
               ),
-              child: Text(
-                  'Một tính năng đáng chú ý của nền tảng Dart là hỗ trợ"tải lại nóng"(hot reload) trong đó các sửa đổi trong tập tin nguồn có thể được chèn vào ứng dụng đang chạy. Flutter mở rộng sự hỗ trợ này cho tính năng"tải lại nóng giữ trạng thái (stateful hot reload), để các sửa đổi trong mã nguồn có thể được cập nhật ngay lập tức lên ứng dụng đang chạy mà không cần phải khởi động lại hoặc mất mát các trạng thái đang có.[11] This feature as implemented in Flutter has received widespread praise.'),
-            ),
-            leading: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/images/murano.jpg'),
-            ),
-            onTap: () {},
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 30),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 2.0,
-              color: Colors.blue,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              margin: EdgeInsets.only(bottom: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-                  color: Colors.blue,
-                  width: 2,
-                )),
-              ),
-              child: Text('Dart'),
-            ),
-            subtitle: Container(
-              padding: EdgeInsets.only(left: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    left: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                )),
-              ),
-              child: Text(
-                  'Dart là một ngôn ngữ lập trình web do Google phát triển. Nó được chính thức công bố tại Hội thảo GOTO Lưu trữ 2012-12-21 tại Wayback Machine ngày 10-12 tháng 10 năm 2011 tại Aarhus.[1] Mục đích của Dart không phải để thay thế JavaScript như là ngôn ngữ kịch bản chính bên trong trình duyệt web, mà là cung cấp sự lựa chọn hiện đại hơn.[2]'),
-            ),
-            leading: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/images/venice.jpg'),
-            ),
-            onTap: () {},
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 30),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 2.0,
-              color: Colors.blue,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ListTile(
-            title: Container(
-              margin: EdgeInsets.only(bottom: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-                  color: Colors.blue,
-                  width: 2,
-                )),
-              ),
-              child: Text('Dart'),
-            ),
-            subtitle: Container(
-              padding: EdgeInsets.only(left: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                    left: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                )),
-              ),
-              child: Text(
-                  'React Native là một framework mã nguồn mở được sáng tạo bởi Facebook.[3] Nó được sử dụng để phát triển ứng dụng di động Android[4], iOS, Web[5] và UWP[6] bằng cách cho phép các nhà phát triển sử dụng React cùng với môi trường ứng dụng gốc (native).'),
-            ),
-            leading: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/images/paris.jpg'),
-            ),
-            onTap: () {},
-          ),
-        ),
-      ]),
+            );
+          }),
     );
     return Scaffold(
-      drawer: _menu,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('LOGO'),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _post,
+            _search,
+            // _post,
             _listpost,
           ],
         ),
       ),
-      // body: Center(
-      //   child: Column(
-      //     children: [
-      //       _post,
-      //       _listpost,
-      //     ],
-      //   ),
-      // ),
       persistentFooterButtons: [
         Container(
           width: 900,
