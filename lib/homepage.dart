@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:student_information_management/menu.dart';
 import 'package:student_information_management/model/post.dart';
 import 'package:student_information_management/notification.dart';
@@ -14,6 +18,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+    List _post = [];
+    late Post posttrending;
+    int maxlike = 0;
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('db/post.json');
+    final data = await json.decode(response);
+    setState(() {
+      _post = data["posts"];
+      for(var i = 0; i<_post.length;i++){
+        if(int.parse(_post[maxlike]["like"]) <= int.parse(_post[i]["like"])){
+          maxlike = i;
+        }
+      }
+    });
+    
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.readJson();
+  }
   @override
   Widget build(BuildContext context) {
     Widget _slide = ListView(
@@ -74,8 +102,8 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Tin tức nổi bật', style: TextStyle(color: Colors.black)),
-          Text('Nội dung', style: TextStyle(color: Colors.white)),
+          Text(_post[maxlike]["title"], style: TextStyle(color: Colors.black)),
+          Text(_post[maxlike]["content"].toString().substring(0,100) + '...', style: TextStyle(color: Colors.white)),
         ],
       ),
     );

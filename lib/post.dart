@@ -15,8 +15,6 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPagePageState extends State<PostPage> {
-  // final _searchPost = TextEditingController();
-  String _searchPost =  "";
   List _lstpost = [];
   List _lstfindpost = [];
 
