@@ -20,18 +20,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List _post = [];
-  late Post posttrending;
-  int maxlike = 0;
+  List _notifications = [];
+  int maxlikepost = 0;
+  int maxlikenotification = 0;
 
   // Fetch content from the json file
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('db/post.json');
     final data = await json.decode(response);
     setState(() {
+      //post
       _post = data["posts"];
       for (var i = 0; i < _post.length; i++) {
-        if (int.parse(_post[maxlike]["like"]) <= int.parse(_post[i]["like"])) {
-          maxlike = i;
+        if (int.parse(_post[maxlikepost]["like"]) <= int.parse(_post[i]["like"])) {
+          maxlikepost = i;
+        }
+      }
+      //notification
+      _notifications = data["notifications"];
+      for (var j = 0; j < _notifications.length; j++) {
+        if (int.parse(_notifications[maxlikepost]["like"]) <= int.parse(_notifications[j]["like"])) {
+          maxlikepost = j;
         }
       }
     });
@@ -108,9 +117,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(_post[maxlike]["title"],
+            Text(_post[maxlikepost]["title"],
                 style: TextStyle(color: Colors.black)),
-            Text(_post[maxlike]["content"].toString().substring(0, 100) + '...',
+            Text(_post[maxlikepost]["content"].toString().substring(0, 100) + '...',
                 style: TextStyle(color: Colors.white)),
           ],
         ),
@@ -129,12 +138,20 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.all(10),
       width: 300,
       height: 100,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Thông báo nổi bật', style: TextStyle(color: Colors.black)),
-          Text('Nội dung', style: TextStyle(color: Colors.white)),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SearchPage()));
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(_notifications[maxlikenotification]["title"],
+                style: TextStyle(color: Colors.black)),
+            Text(_notifications[maxlikenotification]["content"].toString().substring(0, 100) + '...',
+                style: TextStyle(color: Colors.white)),
+          ],
+        ),
       ),
     );
     return Scaffold(
