@@ -12,7 +12,6 @@ import 'package:student_information_management/start.dart';
 import 'package:student_information_management/menu.dart';
 import 'package:student_information_management/model/post.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -80,4 +79,3 @@ class _FirstPageState extends State<FirstPage> {
     );
   }
 }
-
