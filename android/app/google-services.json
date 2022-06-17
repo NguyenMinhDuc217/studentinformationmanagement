@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "292752231296",
+    "project_id": "student-information-mana-46f25",
+    "storage_bucket": "student-information-mana-46f25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292752231296:android:4619d673af7c32a43e8f65",
+        "android_client_info": {
+          "package_name": "com.example.student_information_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292752231296-vs905ug2q484unk0ujeh6l2bltco8oo6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAp-YkppH2QGi07BdQdlQZDWSWOAV2Q8dM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292752231296-vs905ug2q484unk0ujeh6l2bltco8oo6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

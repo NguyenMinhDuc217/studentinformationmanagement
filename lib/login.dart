@@ -49,8 +49,8 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: TextField(
-                  style: TextStyle(fontSize: 18, color: Colors.purple),
                   controller: _controller1,
+                  style: TextStyle(fontSize: 18, color: Colors.purple),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -64,8 +64,8 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: TextField(
-                  style: TextStyle(fontSize: 18, color: Colors.black54),
                   controller: _controller2,
+                  style: TextStyle(fontSize: 18, color: Colors.black54),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -87,10 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     onPressed: () {
                       if (_controller1 == _controller2) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                       }
                       else{
                         Navigator.push(
