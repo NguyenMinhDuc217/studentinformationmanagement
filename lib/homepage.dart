@@ -147,13 +147,11 @@ class _HomePageState extends State<HomePage> {
               //       context, MaterialPageRoute(builder: (context) => SearchPage()));
               // },
               child: Container(
-                // color: Colors.white,
                 margin: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                   color: Colors.blue[100],
                     border: Border.all(
                     width: 2.0,
-                    // color: Colors.blue,
                     ),
                     borderRadius: BorderRadius.circular(10),
                 ),
@@ -169,7 +167,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   // child: Text(_post[maxlikepost]["title"]),
                   child: Text(DateTime.parse("2022-06-20 22:37:54.789757").toString(), style: TextStyle(color: Colors.red)),
-                  // child: Text('abc'),
                 ),
                 subtitle: Container(
                   padding: EdgeInsets.only(left: 5),
