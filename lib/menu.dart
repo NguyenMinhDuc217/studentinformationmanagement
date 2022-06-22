@@ -60,7 +60,7 @@ class _MenuPagePageState extends State<MenuPage> {
             },
           ),
           ListTile(
-            title: const Text('Khoa'),
+            title: const Text('Khoa Công Nghệ Thông Tin'),
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DepartmentPage()));
@@ -68,6 +68,18 @@ class _MenuPagePageState extends State<MenuPage> {
           ),
           ListTile(
             title: const Text('Phòng'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Đoàn thanh niên'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Học bổng - Vay vốn'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Học phí'),
             onTap: () {},
           ),
           ListTile(

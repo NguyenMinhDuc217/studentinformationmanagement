@@ -1,5 +1,5 @@
 // ignore: unused_import
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/material.dart';
 
@@ -9,6 +9,15 @@ class MainPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget _back = Column(
+      children: [
+        TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Quay lại', style: TextStyle(color: Colors.blue)))
+      ],
+    );
     //final top = coverHeight - profileHeight / 2;
     return Scaffold(
       body: ListView(
@@ -19,7 +28,8 @@ class MainPages extends StatelessWidget {
           buildLLo(),
           buildLLo1(),
           buildLLo2(),
-          buildLLo3()
+          buildLLo3(),
+          _back,
         ],
       ),
     );

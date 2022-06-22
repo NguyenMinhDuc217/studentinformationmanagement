@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:student_information_management/detailpost.dart';
 import 'package:student_information_management/menu.dart';
 import 'package:student_information_management/model/post.dart';
+import 'package:student_information_management/detailpost.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({Key? key}) : super(key: key);

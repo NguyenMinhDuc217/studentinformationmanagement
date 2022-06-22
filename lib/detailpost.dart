@@ -39,6 +39,10 @@ class _DetailPostPageState extends State<DetailPostPage> {
 
   List _lstpost = [];
   List _lstfindpost = [];
+  bool _icon=true;
+  int like = 10;
+  String yourlike = ' ';
+  String orderlike = ' ';
 
   // Fetch content from the json file
   Future<void> readJson() async {
@@ -58,7 +62,8 @@ class _DetailPostPageState extends State<DetailPostPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _detailPost = Column(
+    Widget _detailPost = Container(
+        child: Column(
       children: [
         Container(
             margin: EdgeInsets.only(left: 50, top: 30, right: 50),
@@ -77,29 +82,72 @@ class _DetailPostPageState extends State<DetailPostPage> {
         Container(
           margin: EdgeInsets.only(left: 50, top: 30, right: 50),
           child: Column(
-            children: [
-              Flexible(
-                child: Text(
-                    _lstfindpost[0]['canseemore']
-                        ? _lstfindpost[0]['content']
-                            .toString()
-                            .substring(0, 100)
-                        : _lstfindpost[0]['content'].toString(),
-                    style: TextStyle(color: Colors.grey, fontSize: 20)),
+            children: <Widget>[
+              // Flexible(
+              //   child: Text(
+              //     // _lstfindpost[0]['canseemore']? _lstfindpost[0]['content'].toString().substring(0, 100): _lstfindpost[0]['content'].toString(),
+              //     // _lstfindpost[0]['canseemore']? 'Ngắn': 'Dài',
+              //     'abc',
+              //       style: TextStyle(color: Colors.grey, fontSize: 20)),
+              // ),
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 2.0,
+                    color: Colors.blue,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      _lstfindpost[0]['canseemore']
+                          ? _lstfindpost[0]['content'].toString().substring(0, 100)
+                          : _lstfindpost[0]['content'].toString(),
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (_lstfindpost[0]['canseemore'] == true) {
+                          _lstfindpost[0]['canseemore'] = false;
+                        } else {
+                          _lstfindpost[0]['canseemore'] = true;
+                        }
+                        setState(() {});
+                      },
+                      child: Text(
+                          _lstfindpost[0]['canseemore'] ? 'Xem tiếp' : 'Rút gọn',
+                          style: TextStyle(color: Colors.blue, fontSize: 15)),
+                    )
+                  ],
+                ),
               ),
-              TextButton(
-                onPressed: () {
-                  if (_lstfindpost[0]['canseemore'] == true) {
-                    _lstfindpost[0]['canseemore'] = false;
-                  } else {
-                    _lstfindpost[0]['canseemore'] = true;
-                  }
-                  setState(() {});
-                },
-                child: Text(
-                    _lstfindpost[0]['canseemore'] ? 'Xem tiếp' : 'Rút gọn',
-                    style: TextStyle(color: Colors.blue)),
-              )
+              
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 50, right: 50),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.blue,
+                width: 2,
+            ))
+          ),
+          child: Row(
+            children: [
+              // Container(
+              //    decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(45),
+              //       color: Colors.blue,
+              //       border: Border.all(width: 2),
+              //    ),
+              //   child: Icon(Icons.thumb_up, color: Colors.white,),
+              // ),
+              Text(yourlike+( like.toString())+orderlike,style: TextStyle(color: Colors.black)),
             ],
           ),
         ),
@@ -108,14 +156,30 @@ class _DetailPostPageState extends State<DetailPostPage> {
             children: [
               Expanded(
                   child: IconButton(
-                icon: Icon(Icons.thumb_up, color: Colors.blue),
-                onPressed: () {},
-              ))
+                    onPressed: () {
+                      _icon != _icon;
+                      if(_icon == true){
+                        like++;
+                        yourlike = 'Bạn';
+                        orderlike = 'và người khác.';
+                        _icon=false;
+                      }else{
+                        like--;
+                        yourlike = ' ';
+                        orderlike = '';
+                        _icon=true;
+                      }
+                      setState(() {});
+                    },
+                    icon: _icon?Icon(Icons.thumb_up_alt_outlined, color: Colors.blue):Icon(Icons.thumb_up_alt_rounded,color: Colors.blue),
+                    // icon: Icon(Icons.thumb_up_alt_outlined, color: Colors.blue),
+                  )
+              )
             ],
           ),
         )
       ],
-    );
+    ));
     return Scaffold(
       drawer: MenuPage(),
       appBar: AppBar(
