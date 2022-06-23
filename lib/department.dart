@@ -581,22 +581,22 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listLTT,
               ],
             ),
-            
+
             //title câu lạc bộ
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _cauLacBo,
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _listCauLacBo,
-            //   ],
-            // ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _cauLacBo,
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _listCauLacBo,
+              ],
+            ),
           ],
         ),
       ),
