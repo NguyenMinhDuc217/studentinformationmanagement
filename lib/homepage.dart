@@ -24,11 +24,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List _post = [];
   List _postnew = [];
-  List _notifications = [];
+  List _temp = [];
+  List _postTrending = [];
   int maxlikepost = 0;
-  int maxlikenotification = 0;
   var dateTime = "";
-
   
   // var date = new DateTime.now();
   // var dt = DateFormat("dd-MM-yyyy").format(date);
@@ -41,18 +40,36 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       //post
       _post = data["posts"];
+
       for (var i = 0; i < _post.length; i++) {
         if (int.parse(_post[maxlikepost]["like"]) <= int.parse(_post[i]["like"])) {
           maxlikepost = i;
         }
       }
-      //notification
-      _notifications = data["notifications"];
-      for (var j = 0; j < _notifications.length; j++) {
-        if (int.parse(_notifications[maxlikepost]["like"]) <= int.parse(_notifications[j]["like"])) {
-          maxlikepost = j;
+      //post trending
+      _post = data["posts"];
+      // print(_post);
+      // var _n = _post.length + 1;
+      for (var j = 0; j < _post.length; j++) {
+        for(var k = 0; k <= j ; k++){
+          if(int.parse(_post[j]["like"]) < int.parse(_post[k]["like"])){
+            _temp = _post[j];
+            _post[j] = _post[k];
+            _post[k] = _temp;
+            // print(_post[j]);
+          }
+            _postTrending.add(_post[j]);
         }
+        // if (int.parse(_post[maxlikepost]["like"]) <= int.parse(_post[j]["like"])) {
+        //   maxlikepost = j;
+        //   _postTrending.add(_post[j]);
+        // }
+        // _postTrending.add(_post[maxlikepost]);
+        // print(_post[j]);
+          // _temp = _post[j];
       }
+      // _postTrending.add(_temp);
+        print(_postTrending);
     });
   }
 
@@ -107,7 +124,8 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         }));
-    Widget _newPostList = Container(
+    
+    Widget _titlePostList = Container(
       margin: EdgeInsets.only(bottom: 5),
       width: 200,
       height: 50,
@@ -124,6 +142,7 @@ class _HomePageState extends State<HomePage> {
         child: Text('New post list', style: TextStyle(color: Colors.white, fontSize: 30)),
       ),
     );
+    
     Widget _listnew = Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -142,10 +161,6 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (BuildContext context, int index){
           return Container(
             child: GestureDetector(
-              // onTap: () {
-              //   Navigator.push(
-              //       context, MaterialPageRoute(builder: (context) => SearchPage()));
-              // },
               child: Container(
                 margin: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
@@ -199,53 +214,210 @@ class _HomePageState extends State<HomePage> {
           );
         })
     );
-    Widget _notification = Container(
-      margin: EdgeInsets.only(top: 30),
+    
+    Widget _titleMostPopularPostList = Container(
+      margin: EdgeInsets.only(bottom: 5, top: 30),
+      width: 300,
+      height: 50,
       decoration: BoxDecoration(
-        color: Colors.blue[300],
+        color: Colors.blue,
         border: Border.all(
           width: 5.0,
-          color: Colors.blue,
+          color: Colors.blueGrey,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        child: Text('List of most popular', style: TextStyle(color: Colors.white, fontSize: 30)),
+      ),
+    );
+    
+    Widget _listMostPopularPost = Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          width: 5.0,
+          color: Colors.yellow,
         ),
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.all(10),
+      width: 350,
+      height: 300,
+      child: ListView.builder(
+        // shrinkWrap: true,
+        itemCount: _post.length,
+        itemBuilder: (BuildContext context, int index){
+          return Container(
+            child: GestureDetector(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                    border: Border.all(
+                    width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                title: Container(
+                  margin: EdgeInsets.only(bottom: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                      color: Colors.blue,
+                      width: 2,
+                    )),
+                  ),
+                  // child: Text(_post[maxlikepost]["title"]),
+                  child: Text('abc', style: TextStyle(color: Colors.red)),
+                ),
+                subtitle: Container(
+                  padding: EdgeInsets.only(left: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        left: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    )),
+                  ),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(_post[maxlikepost]['content'].toString().substring(0,100) + '...',
+                            style: TextStyle(color: Colors.black)),
+                      ),
+                    ],
+                  ),
+                ),
+                leading: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/'+_post[maxlikepost]['image'].toString()),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
+                },
+              ),
+              )
+            ),
+          );
+        })
+    );
+    
+    Widget _titlePostListTrending = Container(
+      margin: EdgeInsets.only(bottom: 5, top: 30),
       width: 300,
-      height: 100,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SearchPage()));
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(_notifications[maxlikenotification]["title"],
-                style: TextStyle(color: Colors.black)),
-            Text(_notifications[maxlikenotification]["content"].toString().substring(0, 100) + '...',
-                style: TextStyle(color: Colors.white)),
-          ],
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        border: Border.all(
+          width: 5.0,
+          color: Colors.blueGrey,
         ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        child: Text('List of post trending', style: TextStyle(color: Colors.white, fontSize: 30)),
       ),
     );
+    
+    Widget _listPostTrending = Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          width: 5.0,
+          color: Colors.yellow,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.all(10),
+      width: 350,
+      height: 300,
+      child: ListView.builder(
+        // shrinkWrap: true,
+        itemCount: _post.length,
+        itemBuilder: (BuildContext context, int index){
+          return Container(
+            child: GestureDetector(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                    border: Border.all(
+                    width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                title: Container(
+                  margin: EdgeInsets.only(bottom: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                      color: Colors.blue,
+                      width: 2,
+                    )),
+                  ),
+                  // child: Text(_post[maxlikepost]["title"]),
+                  child: Text(_postTrending[index]["title"].toString(), style: TextStyle(color: Colors.red)),
+                  // child: Text("abc", style: TextStyle(color: Colors.red)),
+
+                ),
+                subtitle: Container(
+                  padding: EdgeInsets.only(left: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                        left: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    )),
+                  ),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(_postTrending[index]['content'].toString().substring(0,100) + '...',
+                            style: TextStyle(color: Colors.black)),
+                      ),
+                    ],
+                  ),
+                ),
+                leading: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/'+_postTrending[index]['image'].toString()),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
+                },
+              ),
+              )
+            ),
+          );
+        })
+    );
+    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //slider
             Container(
               padding: EdgeInsets.all(10),
               height: 200,
               child: _slide,
             ),
+            //title new post list
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _newPostList,
+                _titlePostList,
               ],
             ),
+            //new post list
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -253,11 +425,36 @@ class _HomePageState extends State<HomePage> {
                 _listnew,
               ],
             ),
+            //title most popular post list
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _notification,
+                _titleMostPopularPostList,
+              ],
+            ),
+            //most popular post list
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _listMostPopularPost,
+              ],
+            ),
+            //title post list trending
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _titlePostListTrending,
+              ],
+            ),
+            //post list trending
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _listPostTrending,
               ],
             ),
           ],
