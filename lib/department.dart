@@ -110,6 +110,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
       _temp["canseemore"] as bool,
     );
   }
+  
   @override
   void initState() {
     super.initState();
@@ -516,7 +517,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 )),
               );
             }));
-
+    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       drawer: _menu,
@@ -598,7 +599,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listCauLacBo,
               ],
             ),
-            
+
           ],
         ),
       ),

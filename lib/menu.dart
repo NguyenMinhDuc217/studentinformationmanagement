@@ -8,6 +8,8 @@ import 'package:student_information_management/profile.dart';
 import 'package:student_information_management/search.dart';
 import 'package:student_information_management/setting.dart';
 
+import './mode_toggle_button.dart';
+
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
 
@@ -34,6 +36,13 @@ class _MenuPagePageState extends State<MenuPage> {
                 ),
               ],
             ),
+          ),
+          Container(
+            child: Column(
+              children: [
+                ModeToggleButton(),
+              ],
+            )
           ),
           SizedBox(
             width: double.infinity,

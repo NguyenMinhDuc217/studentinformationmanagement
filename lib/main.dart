@@ -1,7 +1,15 @@
+// ignore_for_file: unused_import
+
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+import './providers/theme_provider.dart';
+
+import './mode_toggle_button.dart';
+
 import 'package:student_information_management/department.dart';
 import 'package:student_information_management/errorlogin.dart';
 import 'package:student_information_management/homepage.dart';
@@ -25,15 +33,45 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        //  brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
+        return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => ThemeProvider(),
+        ),
+        //Your other providers goes here...
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (ctx, themeObject, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Dynamic Theme Demo',
+          themeMode: themeObject.mode,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            primaryColor: Colors.blue[600],
+            accentColor: Colors.amber[700],
+            brightness: Brightness.light,
+            backgroundColor: Colors.grey[100],
+            fontFamily: 'Karla',
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          darkTheme: ThemeData(
+            primarySwatch: Colors.blue,
+            primaryColor: Colors.blue[300],
+            accentColor: Colors.amber,
+            brightness: Brightness.dark,
+            backgroundColor: Colors.grey[900],
+            fontFamily: 'Karla',
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: FirstPage(),
+        ),
       ),
-      home: FirstPage(),
     );
+    // return MaterialApp(
+    //   title: 'Flutter Demo',
+    //   debugShowCheckedModeBanner: false,
+    //   home: FirstPage(),
+    // );
   }
 }
 
