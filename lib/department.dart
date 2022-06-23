@@ -547,22 +547,22 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listDATN,
               ],
             ),
-            
+
             //title thực tập tốt nghiệp
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _thucTapTotNghiep,
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _listTTN,
-            //   ],
-            // ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _thucTapTotNghiep,
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _listTTN,
+              ],
+            ),
             //title lịch thi lại
             // Row(
             //   mainAxisSize: MainAxisSize.min,
