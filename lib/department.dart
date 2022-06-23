@@ -556,6 +556,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _thucTapTotNghiep,
               ],
             ),
+            //data thuc tap tot nghiep
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -563,6 +564,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listTTN,
               ],
             ),
+            
             //title lịch thi lại
             // Row(
             //   mainAxisSize: MainAxisSize.min,
