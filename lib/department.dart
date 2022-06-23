@@ -590,6 +590,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _cauLacBo,
               ],
             ),
+            //data câu lạc bộ
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -597,6 +598,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listCauLacBo,
               ],
             ),
+            
           ],
         ),
       ),
