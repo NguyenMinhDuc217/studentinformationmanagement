@@ -539,6 +539,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _doAnTotNghiep,
               ],
             ),
+            //data đồ án tốt nghiệp
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -546,6 +547,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listDATN,
               ],
             ),
+            
             //title thực tập tốt nghiệp
             // Row(
             //   mainAxisSize: MainAxisSize.min,
