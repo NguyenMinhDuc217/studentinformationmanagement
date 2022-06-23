@@ -190,7 +190,6 @@ Future<int> countPost() async {
         child: Column(
           children: [
             _search,
-            // _post,
             _listpost,
           ],
         ),

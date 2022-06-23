@@ -72,6 +72,9 @@ flutter:
     - images/code2.jpg
     - assets/images/
     - db/post.json
+    - assets/images/clb/
+    - assets/images/ltl/
+    - assets/images/tttn/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
