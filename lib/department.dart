@@ -573,6 +573,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _lichThiLai,
               ],
             ),
+            //data lich thi lai
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -580,6 +581,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listLTT,
               ],
             ),
+            
             //title câu lạc bộ
             // Row(
             //   mainAxisSize: MainAxisSize.min,
