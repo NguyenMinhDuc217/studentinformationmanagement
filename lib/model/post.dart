@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 // import 'package:firebase_database/firebase_database.dart';
 
 class Post {
-  int id;
-  String image;
-  String title;
-  String content;
-  int like;
+  int id = 0;
+  String image = "";
+  String title = "";
+  String content = "";
+  int like = 0;
+  bool canseemore = true;
 
 
-  Post(this.id, this.image, this.title, this.content, this.like);
+  Post(this.id, this.image, this.title, this.content, this.like, this.canseemore);
   
 
   // Future<int> getMaBV() async {
@@ -44,10 +45,10 @@ class Post {
   //   this.noidung = noidung;
   // }
 
-  // // Future<void> getdata() async {
-  // //   FirebaseDatabase database = FirebaseDatabase.instance;
-  // //   DatabaseReference ref = FirebaseDatabase.instance.ref("BaiViet/0");
-  // //   DatabaseEvent event = await ref.once();
-  // //   print(event.snapshot.value);
-  // // }
+  // Future<void> getdata() async {
+  //   FirebaseDatabase database = FirebaseDatabase.instance;
+  //   DatabaseReference ref = FirebaseDatabase.instance.ref("BaiViet/0");
+  //   DatabaseEvent event = await ref.once();
+  //   print(event.snapshot.value);
+  // }
 }

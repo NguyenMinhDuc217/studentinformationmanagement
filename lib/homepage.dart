@@ -24,7 +24,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List _post = [];
   List _postnew = [];
-  List _temp = [];
   List _postTrending = [];
   int maxlikepost = 0;
   var dateTime = "";
@@ -48,28 +47,17 @@ class _HomePageState extends State<HomePage> {
       }
       //post trending
       _post = data["posts"];
-      // print(_post);
+      _postTrending = _post;
       // var _n = _post.length + 1;
-      for (var j = 0; j < _post.length; j++) {
-        for(var k = 0; k <= j ; k++){
-          if(int.parse(_post[j]["like"]) < int.parse(_post[k]["like"])){
-            _temp = _post[j];
-            _post[j] = _post[k];
-            _post[k] = _temp;
-            // print(_post[j]);
+      for (var j = 0; j < _postTrending.length-1; j++) {
+        for(var k = j + 1; k < _postTrending.length ; k++){
+          if(int.parse(_postTrending[j]["like"]) < int.parse(_postTrending[k]["like"])){
+            dynamic _temp = _postTrending[j];
+            _postTrending[j] = _postTrending[k];
+            _postTrending[k] = _temp;
           }
-            _postTrending.add(_post[j]);
         }
-        // if (int.parse(_post[maxlikepost]["like"]) <= int.parse(_post[j]["like"])) {
-        //   maxlikepost = j;
-        //   _postTrending.add(_post[j]);
-        // }
-        // _postTrending.add(_post[maxlikepost]);
-        // print(_post[j]);
-          // _temp = _post[j];
       }
-      // _postTrending.add(_temp);
-        print(_postTrending);
     });
   }
 
