@@ -177,7 +177,7 @@ Future<int> countPost() async {
                 ),
                 onTap: () {
                   // print(_lstfindpost[index]["id"]);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage(postId: _lstfindpost[index]["id"].toString())));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage(postId: _lstfindpost[index].id.toString())));
                   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
                 },
               ),

@@ -53,13 +53,6 @@ class _MenuPagePageState extends State<MenuPage> {
             ),
           ),
           ListTile(
-            title: const Text('Tìm kiếm'),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SearchPage()));
-            },
-          ),
-          ListTile(
             title: const Text('Khoa Công Nghệ Thông Tin'),
             onTap: () {
               Navigator.push(context,
