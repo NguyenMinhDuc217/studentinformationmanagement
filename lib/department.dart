@@ -564,22 +564,22 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _listTTN,
               ],
             ),
-            
+
             //title lịch thi lại
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _lichThiLai,
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _listLTT,
-            //   ],
-            // ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _lichThiLai,
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _listLTT,
+              ],
+            ),
             //title câu lạc bộ
             // Row(
             //   mainAxisSize: MainAxisSize.min,
