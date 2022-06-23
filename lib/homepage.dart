@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       //post
       _post = data["posts"];
-
       for (var i = 0; i < _post.length; i++) {
         if (int.parse(_post[maxlikepost]["like"]) <= int.parse(_post[i]["like"])) {
           maxlikepost = i;
@@ -48,7 +47,6 @@ class _HomePageState extends State<HomePage> {
       //post trending
       _post = data["posts"];
       _postTrending = _post;
-      // var _n = _post.length + 1;
       for (var j = 0; j < _postTrending.length-1; j++) {
         for(var k = j + 1; k < _postTrending.length ; k++){
           if(int.parse(_postTrending[j]["like"]) < int.parse(_postTrending[k]["like"])){

@@ -95,7 +95,10 @@ Future<int> countPost() async {
       title: TextField(
         onChanged: (value) => find(value),
         decoration: const InputDecoration(
-            labelText: 'Search', suffixIcon: Icon(Icons.search)),
+          labelStyle: TextStyle(
+            color:  Colors.red,
+          ),
+            labelText: 'Search', suffixIcon: Icon(Icons.search, color: Colors.red,)),
       ),
     );
     Widget _post = Container(
@@ -119,8 +122,9 @@ Future<int> countPost() async {
             return Container(
               margin: EdgeInsets.only(bottom: 30),
               decoration: BoxDecoration(
+                color: Colors.white,
                 border: Border.all(
-                  width: 2.0,
+                  width: 3.0,
                   color: Colors.blue,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -150,7 +154,7 @@ Future<int> countPost() async {
                     children: [
                       Flexible(
                         child: Text(_lstfindpost[index].canseemore ? _lstfindpost[index].content.toString().substring(0,100) : _lstfindpost[index].content.toString(),
-                            style: TextStyle(color: Colors.grey)),
+                            style: TextStyle(color: Colors.black)),
                       ),
                       TextButton(
                         onPressed: () {
@@ -166,7 +170,6 @@ Future<int> countPost() async {
                       )
                     ],
                   ),
-                  // child: Text(_lstfindpost[index]['content'].toString()),
                 ),
                 leading: CircleAvatar(
                   radius: 50,
@@ -182,7 +185,7 @@ Future<int> countPost() async {
           }),
     );
     return Scaffold(
-      
+      backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -192,21 +195,21 @@ Future<int> countPost() async {
           ],
         ),
       ),
-      persistentFooterButtons: [
-        Container(
-          width: 900,
-          child: TextButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            ),
-            onPressed: () {},
-            child: Text(
-              'Thông tin liên lạc',
-              style: TextStyle(color: Colors.blue[900]),
-            ),
-          ),
-        )
-      ],
+      // persistentFooterButtons: [
+      //   Container(
+      //     width: 900,
+      //     child: TextButton(
+      //       style: ButtonStyle(
+      //         foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+      //       ),
+      //       onPressed: () {},
+      //       child: Text(
+      //         'Thông tin liên lạc',
+      //         style: TextStyle(color: Colors.blue[900]),
+      //       ),
+      //     ),
+      //   )
+      // ],
     );
   }
 }
