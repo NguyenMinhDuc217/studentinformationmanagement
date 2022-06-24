@@ -6,16 +6,17 @@ import 'package:flutter/services.dart';
 import 'package:student_information_management/detailpost.dart';
 import 'package:student_information_management/menu.dart';
 import 'package:student_information_management/model/post.dart';
+import 'package:student_information_management/phongctct_hssv/detaillichdaotao.dart';
 
-class DepartmentPage extends StatefulWidget {
-  const DepartmentPage({Key? key}) : super(key: key);
+class ChiTietPhongDaoTaoPage extends StatefulWidget {
+  const ChiTietPhongDaoTaoPage({Key? key}) : super(key: key);
 
   @override
-  State<DepartmentPage> createState() => _DepartmentPageState();
+  State<ChiTietPhongDaoTaoPage> createState() => _ChiTietPhongDaoTaoPageState();
 }
 
-class _DepartmentPageState extends State<DepartmentPage> {
-  List<Post> _lstpost = [];
+class _ChiTietPhongDaoTaoPageState extends State<ChiTietPhongDaoTaoPage> {
+  List<Post> _lstpostldt = [];
   List<Post> _lstpostttn = [];
   List<Post> _lstpostltl = [];
   List<Post> _lstpostclb = [];
@@ -26,16 +27,16 @@ class _DepartmentPageState extends State<DepartmentPage> {
   late DatabaseReference child;
   late DatabaseEvent event;
 
-  //ĐATN
-  Future<int> countPost() async {
-    ref = FirebaseDatabase.instance.ref("DoAnTotNghiep");
+  //LỊCH ĐÀO TÀO
+  Future<int> countPostLichDaoTao() async {
+    ref = FirebaseDatabase.instance.ref("LichDaoTao");
     event = await ref.once();
     setState(() {});
     return event.snapshot.children.length;
   }
 
-  Future<Post> readFirebase(int id) async {
-    ref = FirebaseDatabase.instance.ref("DoAnTotNghiep/" + id.toString());
+  Future<Post> readFirebaseLichDaoTao(int id) async {
+    ref = FirebaseDatabase.instance.ref("LichDaoTao/" + id.toString());
     event = await ref.once();
     dynamic _temp = event.snapshot.value;
     setState(() {});
@@ -121,14 +122,13 @@ class _DepartmentPageState extends State<DepartmentPage> {
   @override
   void initState() {
     super.initState();
-    this.countPost().then((value) {
+    this.countPostLichDaoTao().then((value) {
       _countPost = value;
       for (var i = 0; i < _countPost; i++) {
-        this.readFirebase(i).then((post) {
-          _lstpost.add(post);
+        this.readFirebaseLichDaoTao(i).then((post) {
+          _lstpostldt.add(post);
         });
       }
-      print(_lstpost);
     });
     this.countPostTTTN().then((value) {
       _countPost = value;
@@ -160,8 +160,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
   Widget build(BuildContext context) {
     Widget _menu = MenuPage();
 
-    // ĐỒ ÁN TỐT NGHIỆP
-    Widget _doAnTotNghiep = Container(
+    // Lịch đào tạo
+    Widget _lichDaoTao = Container(
       margin: EdgeInsets.only(bottom: 5, top: 20),
       width: 300,
       height: 50,
@@ -175,11 +175,11 @@ class _DepartmentPageState extends State<DepartmentPage> {
       ),
       child: Container(
         alignment: Alignment.center,
-        child: Text('Đồ án tốt nghiệp',
+        child: Text('LỊch đào tạo',
             style: TextStyle(color: Colors.white, fontSize: 30)),
       ),
     );
-    Widget _listDATN = Container(
+    Widget _listLichDaoTao = Container(
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(
@@ -192,7 +192,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
         width: 350,
         height: 300,
         child: ListView.builder(
-            itemCount: _lstpost.length,
+            itemCount: _lstpostldt.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 child: GestureDetector(
@@ -215,7 +215,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                           width: 2,
                         )),
                       ),
-                      child: Text(_lstpost[index].title.toString(),
+                      child: Text(_lstpostldt[index].title.toString(),
                           style: TextStyle(color: Colors.red)),
                     ),
                     subtitle: Container(
@@ -231,7 +231,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                         children: [
                           Flexible(
                             child: Text(
-                                _lstpost[index]
+                                _lstpostldt[index]
                                         .content
                                         .toString()
                                         .substring(0, 50) +
@@ -244,11 +244,11 @@ class _DepartmentPageState extends State<DepartmentPage> {
                     leading: CircleAvatar(
                       radius: 50,
                       backgroundImage: AssetImage(
-                          'assets/images/' + _lstpost[index].image.toString()),
+                          'assets/images/lichdaotao/' + _lstpostldt[index].image.toString()),
                     ),
-                    // onTap: () {
-                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
-                    // },
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailLichDaoTaoPage(postId: index,)));
+                    },
                   ),
                 )),
               );
@@ -269,7 +269,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
       ),
       child: Container(
         alignment: Alignment.center,
-        child: Text('Thực tập tốt nghiệp',
+        child: Text('Thời khoá biểu',
             style: TextStyle(color: Colors.white, fontSize: 30)),
       ),
     );
@@ -341,9 +341,9 @@ class _DepartmentPageState extends State<DepartmentPage> {
                           'assets/images/tttn/' + _lstpostttn[index].image
                             ..toString()),
                     ),
-                    // onTap: () {
-                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
-                    // },
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage(postId: index)));
+                    },
                   ),
                 )),
               );
@@ -364,7 +364,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
       ),
       child: Container(
         alignment: Alignment.center,
-        child: Text('Lịch thi lại',
+        child: Text('Lịch thi',
             style: TextStyle(color: Colors.white, fontSize: 30)),
       ),
     );
@@ -435,9 +435,9 @@ class _DepartmentPageState extends State<DepartmentPage> {
                       backgroundImage: AssetImage('assets/images/ltl/' +
                           _lstpostltl[index].image.toString()),
                     ),
-                    // onTap: () {
-                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
-                    // },
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage(postId: index)));
+                    },
                   ),
                 )),
               );
@@ -458,7 +458,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
       ),
       child: Container(
         alignment: Alignment.center,
-        child: Text('Câu lạc bộ',
+        child: Text('Học kỳ phụ, học kỳ ghép',
             style: TextStyle(color: Colors.white, fontSize: 30)),
       ),
     );
@@ -529,9 +529,9 @@ class _DepartmentPageState extends State<DepartmentPage> {
                       backgroundImage: AssetImage('assets/images/clb/' +
                           _lstpostclb[index].image.toString()),
                     ),
-                    // onTap: () {
-                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage()));
-                    // },
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPostPage(postId: index,)));
+                    },
                   ),
                 )),
               );
@@ -540,7 +540,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       drawer: _menu,
-      appBar: AppBar(centerTitle: true, title: Text('Khoa CNTT'), actions: [
+      appBar: AppBar(centerTitle: true, title: Text('Phòng đào tạo'), actions: [
         TextButton(
             onPressed: () {
               Navigator.pop(context);
@@ -550,26 +550,25 @@ class _DepartmentPageState extends State<DepartmentPage> {
       body: SingleChildScrollView(
           child: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //title đồ án tốt nghiệp
+            //title lịch đào tạo
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _doAnTotNghiep,
+                _lichDaoTao,
               ],
             ),
-            //data đồ án tốt nghiệp
+            //data lịch đào tạo
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _listDATN,
+                _listLichDaoTao,
               ],
             ),
 
-            //title thực tập tốt nghiệp
+            //title thời khoá biểu
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -577,7 +576,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _thucTapTotNghiep,
               ],
             ),
-            //data thuc tap tot nghiep
+            //data thời khoá biểu
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -586,7 +585,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
               ],
             ),
 
-            //title lịch thi lại
+            //title lịch thi
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -594,7 +593,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _lichThiLai,
               ],
             ),
-            //data lich thi lai
+            //data lich thi
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -603,7 +602,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
               ],
             ),
 
-            //title câu lạc bộ
+            //title kế hoạch tổ chức học kì phụ, ghép
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -611,7 +610,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 _cauLacBo,
               ],
             ),
-            //data câu lạc bộ
+            //data kế hoạch tổ chức học kì phụ, ghép
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

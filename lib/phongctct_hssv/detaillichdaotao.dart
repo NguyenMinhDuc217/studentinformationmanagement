@@ -10,21 +10,20 @@ import 'package:flutter/services.dart';
 import 'package:student_information_management/menu.dart';
 import 'package:student_information_management/model/post.dart';
 
-class DetailPostPage extends StatefulWidget {
+class DetailLichDaoTaoPage extends StatefulWidget {
   // const DetailPostPage({Key? key}) : super(key: key);
-  const DetailPostPage({Key? key, required this.postId}) : super(key: key);
+  const DetailLichDaoTaoPage({Key? key, required this.postId}) : super(key: key);
   final int postId;
 
   @override
-  State<DetailPostPage> createState() => _DetailPostPageState();
+  State<DetailLichDaoTaoPage> createState() => _DetailLichDaoTaoPageState();
 }
 
-class _DetailPostPageState extends State<DetailPostPage> {
+class _DetailLichDaoTaoPageState extends State<DetailLichDaoTaoPage> {
   List<Post> _lstpost = [];
   List<Post> _lstfindpost = [];
   int _countPost = 0;
   final _inputComment = TextEditingController();
-  bool _errorInputComment = true;
 
   FirebaseDatabase database = FirebaseDatabase.instance;
   late DatabaseReference ref;
@@ -32,7 +31,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
   late DatabaseEvent event;
 
   Future<Post> readFirebase(int id) async {
-    ref = FirebaseDatabase.instance.ref("BaiViet/" + id.toString());
+    ref = FirebaseDatabase.instance.ref("LichDaoTao/" + id.toString());
     event = await ref.once();
     dynamic _temp = event.snapshot.value;
     setState(() {});
@@ -95,12 +94,12 @@ class _DetailPostPageState extends State<DetailPostPage> {
       children: [
         Container(
             margin: EdgeInsets.only(left: 50, top: 30, right: 50),
-            height: 80,
+            height: 120,
             child: ListTile(
               leading: CircleAvatar(
                 radius: 50,
                 backgroundImage:
-                    AssetImage('assets/images/' + _lstpost[0].image.toString()),
+                    AssetImage('assets/images/lichdaotao/' + _lstpost[0].image.toString()),
               ),
               title: Text(_lstpost[0].title,
                   style: TextStyle(
@@ -160,7 +159,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
           ))),
           child: Row(
             children: [
-              Text(yourlike + (_lstfindpost[0].like.toString()) + orderlike,
+              Text(yourlike + (like.toString()) + orderlike,
                   style: TextStyle(color: Colors.black)),
             ],
           ),
@@ -173,14 +172,12 @@ class _DetailPostPageState extends State<DetailPostPage> {
                 onPressed: () {
                   _icon != _icon;
                   if (_icon == true) {
-                    // like++;
-                    _lstfindpost[0].like++;
+                    like++;
                     yourlike = 'Bạn';
                     orderlike = 'và người khác.';
                     _icon = false;
                   } else {
-                    // like--;
-                    _lstfindpost[0].like--;
+                    like--;
                     yourlike = ' ';
                     orderlike = '';
                     _icon = true;
@@ -197,109 +194,28 @@ class _DetailPostPageState extends State<DetailPostPage> {
       ],
     ));
     Widget _comment = Container(
-      child: Column(
-        children: [
-          Container(
-            height: 50,
-            child: Text(_errorInputComment?"":"Vui lòng nhập không dưới 5 ký tự", style: TextStyle(color: Colors.red),),
-          ),
-          Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    width: 5.0,
-                    color: Colors.yellow,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                width: 300,
-                child: TextField(
-                      controller: _inputComment,
-                      style: TextStyle(fontSize: 18, color: Colors.black54),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        labelText: "Nhập bình luận",
-                        border:
-                            OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
-                      ),
-                    ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue[300],
-                  border: Border.all(
-                    width: 5.0,
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 60,
-                child: OutlinedButton(
-                  child: Text('Gửi', style: TextStyle(color: Colors.white),),
-                  onPressed: (){
-                    if(_inputComment.toString().length<5){
-                      _errorInputComment = false;
-                      setState(() {});
-                    }
-                  },
-                ),
-              ),
-            ],
-          )
-        ],
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          width: 5.0,
+          color: Colors.yellow,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      width: 300,
+      child: TextField(
+        controller: _inputComment,
+        style: TextStyle(fontSize: 18, color: Colors.black54),
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          labelText: "Nhập bình luận",
+          border:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
+        ),
       ),
     );
-    // Widget _comment = Container(
-    //   decoration: BoxDecoration(
-    //     color: Colors.white,
-    //     border: Border.all(
-    //       width: 5.0,
-    //       color: Colors.yellow,
-    //     ),
-    //     borderRadius: BorderRadius.circular(10),
-    //   ),
-    //   width: 300,
-    //   child: TextField(
-    //         controller: _inputComment,
-    //         style: TextStyle(fontSize: 18, color: Colors.black54),
-    //         decoration: InputDecoration(
-    //           filled: true,
-    //           fillColor: Colors.white,
-    //           labelText: "Nhập bình luận",
-    //           border:
-    //               OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-    //           labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
-    //         ),
-    //       ),
-    // );
-    // Widget _send = Container(
-    //   decoration: BoxDecoration(
-    //     color: Colors.blue[300],
-    //     border: Border.all(
-    //       width: 5.0,
-    //       color: Colors.white,
-    //     ),
-    //     borderRadius: BorderRadius.circular(10),
-    //   ),
-    //   height: 60,
-    //   child: OutlinedButton(
-    //     child: Text('Gửi', style: TextStyle(color: Colors.white),),
-    //     onPressed: (){
-    //       if(_inputComment.toString().length<5){
-    //         _errorInputComment = true;
-    //         setState(() {});
-    //       }
-    //     },
-    //   ),
-    // );
-    // Widget _errorcomment = Container(
-    //   height: 50,
-    //   child: Text(_errorInputComment?"đúng":"abc", style: TextStyle(color: Colors.red),),
-    // );
     return Scaffold(
       backgroundColor: Colors.grey[300],
       drawer: MenuPage(),
@@ -317,16 +233,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
         child: Column(
           children: [
             _detailPost,
-            // _errorcomment,
             _comment,
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     _comment,
-            //     _send,
-            //   ],
-            // ),
-            
           ],
         ),
       ),

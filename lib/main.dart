@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:student_information_management/room.dart';
 import './providers/theme_provider.dart';
 
 import './mode_toggle_button.dart';
@@ -67,11 +68,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-    // return MaterialApp(
-    //   title: 'Flutter Demo',
-    //   debugShowCheckedModeBanner: false,
-    //   home: FirstPage(),
-    // );
   }
 }
 

@@ -5,6 +5,7 @@ import 'package:student_information_management/login.dart';
 import 'package:student_information_management/notification.dart';
 import 'package:student_information_management/post.dart';
 import 'package:student_information_management/profile.dart';
+import 'package:student_information_management/room.dart';
 import 'package:student_information_management/search.dart';
 import 'package:student_information_management/setting.dart';
 
@@ -70,7 +71,10 @@ class _MenuPagePageState extends State<MenuPage> {
           ),
           ListTile(
             title: const Text('Phòng'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RoomPage()));
+            },
           ),
           ListTile(
             title: const Text('Đoàn thanh niên'),
