@@ -13,9 +13,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _username = "duc@gmail.com";
+  String _pass = "duc123";
   final _controller1 = TextEditingController();
   final _controller2 = TextEditingController();
-
+  var _usererror = "Vụi lòng nhâp Email hợp lệ";
+  var _passerror = "Vụi lòng nhâp mật khẩu hợp lệ (trên 5 ký tự)";
+  var _usererrorvalid = false;
+  var _passerrorvalid = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     filled: true,
                     fillColor: Colors.white,
                     labelText: "Tài Khoản",
+                    errorText: _usererrorvalid ? _usererror : null,
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black)),
                     labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
@@ -67,11 +73,14 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: TextField(
                   controller: _controller2,
+                 
                   style: TextStyle(fontSize: 18, color: Colors.black54),
+                  obscureText: true,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
                     labelText: "Mật khẩu",
+                    errorText: _passerrorvalid ? _passerror : null,
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black)),
                     labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
@@ -88,12 +97,31 @@ class _LoginPageState extends State<LoginPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     onPressed: () {
-                      if (_controller1.text == _controller2.text && _controller1.text != '') {
+                      if (!_controller1.text.contains('@gmail.com')) {
+                        _usererrorvalid = false;
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => FirstPage()));
+                      } else {
+                        _usererrorvalid = true;
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => const ErrorLoginPage()));
+                      }
+                      if(_controller2.text.length <5){
+                        _passerrorvalid = false;
+                      }else{
+                        _passerrorvalid = true;
+                      }
+                      if(_usererrorvalid == true && _passerrorvalid == true){
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => FirstPage()));
-                      } else {
+                      }
+                      else{
                         Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_information_management/department.dart';
+import 'package:student_information_management/doanthanhnien.dart';
+import 'package:student_information_management/hocbongvayvon.dart';
 import 'package:student_information_management/homepage.dart';
 import 'package:student_information_management/login.dart';
 import 'package:student_information_management/notification.dart';
@@ -78,11 +80,17 @@ class _MenuPagePageState extends State<MenuPage> {
           ),
           ListTile(
             title: const Text('Đoàn thanh niên'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DoanPage()));
+            },
           ),
           ListTile(
             title: const Text('Học bổng - Vay vốn'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HocBongPage()));
+            },
           ),
           ListTile(
             title: const Text('Học phí'),

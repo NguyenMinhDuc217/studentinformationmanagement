@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Karla',
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: FirstPage(),
+          home: LoginPage(),
         ),
       ),
     );

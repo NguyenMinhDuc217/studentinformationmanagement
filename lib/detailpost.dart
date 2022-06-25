@@ -200,7 +200,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
       child: Column(
         children: [
           Container(
-            height: 50,
+            height: 20,
             child: Text(_errorInputComment?"":"Vui lòng nhập không dưới 5 ký tự", style: TextStyle(color: Colors.red),),
           ),
           Row(
@@ -242,7 +242,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
                   child: Text('Gửi', style: TextStyle(color: Colors.white),),
                   onPressed: (){
                     if(_inputComment.toString().length<5){
-                      _errorInputComment = false;
+                      _errorInputComment = true;
                       setState(() {});
                     }
                   },
